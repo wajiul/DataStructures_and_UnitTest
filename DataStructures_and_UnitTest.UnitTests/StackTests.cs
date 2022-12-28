@@ -5,60 +5,57 @@ namespace DataStructures_and_UnitTest.UnitTests
     public class StackTests
     {
 
+        private Stack<string> _Stk;
+
+        [SetUp]
+        public void Setup()
+        {
+            _Stk = new Stack<string>();
+        }
 
         [Test]
         public void push_ValidArgument_AddObjectToTheStack()
         {
-            //Arrange
-            Stack<string> Stk = new Stack<string>();
 
-            //Act
-            Stk.push("abc");
+            _Stk.push("abc");
 
-            //Assert
-            Assert.That(Stk.empty(), Is.EqualTo(false));
-            Assert.That(Stk.top(), Is.EqualTo("abc"));
+            Assert.That(_Stk.empty(), Is.EqualTo(false));
+            Assert.That(_Stk.top(), Is.EqualTo("abc"));
         }
         [Test]
         public void top_EmptyStack_ThrowInvalidOperationException()
         {
-            Stack<string> Stk = new Stack<string>();
-            Assert.That(() => Stk.top(), Throws.InvalidOperationException);
+            Assert.That(() => _Stk.top(), Throws.InvalidOperationException);
         }
         [Test]
         public void pop_EmptyStack_ThrowInvalidOperationException()
         {
 
-            Stack<string> Stk = new Stack<string>();
-            Assert.That(() => Stk.pop(), Throws.InvalidOperationException);
+            Assert.That(() => _Stk.pop(), Throws.InvalidOperationException);
         }
         [Test]
         public void pop_StackNotEmpty_RemoveTopElementFromStack()
         {
-            Stack<string> Stk = new Stack<string>();
 
-            Stk.push("A");
-            Stk.push("B");
+            _Stk.push("A");
+            var Top = _Stk.top();
+            _Stk.pop();
 
-            Stk.pop();
-
-            Assert.That(Stk.top(), Is.EqualTo("A"));
+            Assert.That(Top != null);
         }
 
         [Test]
         public void empty_StackNotEmpty_ReturnFalse()
         {
-            Stack<string> Stk = new Stack<string>();
-            Stk.push("a");
-            var result = Stk.empty();
+            _Stk.push("a");
+            var result = _Stk.empty();
             Assert.That(result, Is.False);
         }
 
         [Test]
         public void empty_EmptyStack_ReturnTrue()
         {
-            Stack<string> Stk = new Stack<string>();
-            var result = Stk.empty();
+            var result = _Stk.empty();
             Assert.That(result, Is.True);
         }
     }
